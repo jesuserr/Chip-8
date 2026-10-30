@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/10/25 20:50:25 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/10/30 21:05:04 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ typedef struct s_chip8
 	uint8_t		display[64 * 32];	// 64x32 monochrome display
 	uint8_t		keypad[16];
 }	t_chip8;
+
+typedef struct s_data
+{
+	size_t	rom_size;	
+	t_chip8	chip8;
+}	t_data;
 
 static const uint8_t	g_font_data[80] = {
 	0xF0, 0x90, 0x90, 0x90, 0xF0,	// 0
