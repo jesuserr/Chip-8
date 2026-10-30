@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/10/25 19:30:52 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/10/25 20:50:25 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@
 # include "../libft/includes/ft_printf.h"
 # include <stdint.h>						// for fixed-width integer types
 # include <stdio.h>							// for fread
-//# include <stdbool.h>						// for boolean types
-//# include <errno.h>							// for errno
-//# include <signal.h>						// for signal handling
-//# include <sys/time.h>						// for gettimeofday
+# include <errno.h>							// for errno
 
 /*
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
@@ -33,6 +30,7 @@
 */
 # define RAM_SIZE				4096
 # define START_ADDRESS			0x200
+# define MAX_ROM_SIZE			(RAM_SIZE - START_ADDRESS)
 # define FONTSET_START_ADDRESS	0x50
 # define FONTSET_SIZE			80
 
