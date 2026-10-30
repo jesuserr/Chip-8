@@ -6,14 +6,14 @@
 #    By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/25 19:31:01 by jesuserr          #+#    #+#              #
-#    Updated: 2026/10/25 19:31:02 by jesuserr         ###   ########.fr        #
+#    Updated: 2026/10/30 21:52:13 by jesuserr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LIBFT_DIR = libft/
 
 NAME = chip8
-SRCS = main.c
+SRCS = main.c parser.c
 
 PATH_SRCS = ./srcs/
 PATH_OBJS = ./srcs/objs/
@@ -24,7 +24,7 @@ DEPS = $(addprefix $(PATH_DEPS), $(SRCS:.c=.d))
 
 INCLUDE = -I./ -I./libft/includes/
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -pedantic -Wshadow #-g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -pedantic -Wshadow -O2 #-g #-fsanitize=address
 
 NORM = $(addprefix $(PATH_SRCS), $(SRCS)) ./srcs/chip8.h
 GREEN = "\033[0;92m"

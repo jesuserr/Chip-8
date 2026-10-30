@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/10/30 21:05:04 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/10/30 22:16:01 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "../libft/includes/ft_printf.h"
 # include <stdint.h>						// for fixed-width integer types
 # include <stdio.h>							// for fread
-# include <errno.h>							// for errno
 
 /*
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
@@ -80,7 +79,7 @@ static const uint8_t	g_font_data[80] = {
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
 **                        FUNCTION PROTOTYPES
 */
-
-/******************************************************************************/
+/********************************* parser.c ***********************************/
+void	parse_arguments(int argc, char **argv, t_data *data);
 
 #endif
