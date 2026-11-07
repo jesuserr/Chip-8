@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 21:41:11 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/10/30 22:11:56 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/07 22:05:35 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,5 @@ void	parse_arguments(int argc, char **argv, t_data *data)
 	load_rom(argv[1], data);
 	ft_printf("Successfully loaded ROM file: %s ", argv[1]);
 	ft_printf("(%d bytes)\n", (int)data->rom_size);
+	data->running = true;
 }

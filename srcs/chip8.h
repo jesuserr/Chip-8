@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/10/30 22:16:01 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/07 22:00:04 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "../libft/includes/ft_printf.h"
 # include <stdint.h>						// for fixed-width integer types
 # include <stdio.h>							// for fread
+# include <stdbool.h>						// for bool type
 
 /*
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
@@ -53,8 +54,15 @@ typedef struct s_chip8
 
 typedef struct s_data
 {
-	size_t	rom_size;	
-	t_chip8	chip8;
+	size_t		rom_size;
+	uint16_t	opcode;
+	uint8_t		opcode_x;			// 2nd nibble
+	uint8_t		opcode_y;			// 3rd nibble
+	uint8_t		opcode_n;			// 4th nibble
+	uint8_t		opcode_nn;			// 3rd and 4th nibbles (sometimes called kk)
+	uint16_t	opcode_nnn;			// 2nd, 3rd and 4th nibbles
+	bool		running;
+	t_chip8		chip8;
 }	t_data;
 
 static const uint8_t	g_font_data[80] = {
@@ -81,5 +89,9 @@ static const uint8_t	g_font_data[80] = {
 */
 /********************************* parser.c ***********************************/
 void	parse_arguments(int argc, char **argv, t_data *data);
+
+/********************************* chip8.c ************************************/
+void	init_chip8(t_chip8 *chip8);
+void	opcode_0(t_data *data);
 
 #endif
