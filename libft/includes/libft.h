@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 09:22:35 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/10/25 01:17:58 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/02 20:17:04 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ size_t	ft_strspn(const char *s, const char *charset);
 size_t	ft_strcspn(const char *s, const char *reject);
 char	*ft_strstr(const char *haystack, const char *needle);
 void	ft_hex_dump(const void *src, size_t len, size_t bytes_per_line);
+void	print_hex_bytes(unsigned char *byte, size_t j);
 int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

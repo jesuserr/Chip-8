@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:30:14 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/10/25 01:54:02 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/02 21:00:00 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // Print byte in hexadecimal format
 // hex_case = 55 for uppercase (87 for lowercase)
-static void	print_hex_bytes(unsigned char *byte, size_t j)
+void	print_hex_bytes(unsigned char *byte, size_t j)
 {
 	unsigned char	hex_case;
 
