@@ -6,11 +6,29 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:43 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/07 22:16:42 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/08 20:35:12 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chip8.h"
+
+static void	debug_print_opcode(t_data *data)
+{
+	printf("Opcode: 0x%X\n", data->opcode);
+	printf("X: %d, Y: %d, N: %d, NN: %d, NNN: %d\n",
+		data->opcode_x, data->opcode_y, data->opcode_n,
+		data->opcode_nn, data->opcode_nnn);
+	printf("PC: 0x%X, I: 0x%X\n", data->chip8.program_counter, data->chip8.index_register);
+	printf("Registers: ");
+	printf("[");
+	for (int i = 0; i < 16; i++)
+	{
+		printf("0x%X", data->chip8.registers[i]);
+		if (i < 15)
+			printf(", ");
+	}
+	printf("]\n\n");
+}
 
 static void	decode(t_data *data)
 {
@@ -27,6 +45,21 @@ static void	execute(t_data *data)
 	{
 		case 0x0:
 			opcode_0(data);
+			break ;
+		case 0x1:
+			opcode_1(data);
+			break ;
+		case 0x6:
+			opcode_6(data);
+			break ;
+		case 0x7:
+			opcode_7(data);
+			break ;
+		case 0xA:
+			opcode_a(data);
+			break ;
+		case 0xD:
+			opcode_d(data);
 			break ;
 		default:
 			ft_printf("Unknown opcode: %x\n", data->opcode);
@@ -58,6 +91,8 @@ int	main(int argc, char **argv)
 			data.running = false;
 		//ft_hex_dump(&op_code, 2, 2);
 		//ft_printf("%d\n", op_code);
+		sleep(1);
+		debug_print_opcode(&data);
 	}
 	//ft_printf("\n\n");
 	//ft_hex_dump(data.chip8.memory + START_ADDRESS, data.rom_size, 2);

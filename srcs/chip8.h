@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/07 22:00:04 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/08 20:49:23 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # define MAX_ROM_SIZE			(RAM_SIZE - START_ADDRESS)
 # define FONTSET_START_ADDRESS	0x50
 # define FONTSET_SIZE			80
+# define DISPLAY_WIDTH			64
+# define DISPLAY_HEIGHT			32
+# define DISPLAY_SIZE			(DISPLAY_WIDTH * DISPLAY_HEIGHT)
 
 /*
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
@@ -48,7 +51,7 @@ typedef struct s_chip8
 	uint8_t		stack_pointer;		// points to the top of the stack
 	uint8_t		delay_timer;		// counts down at 60 Hz when non-zero
 	uint8_t		sound_timer;		// same as delay_timer, beeps when non-zero
-	uint8_t		display[64 * 32];	// 64x32 monochrome display
+	uint8_t		display[DISPLAY_SIZE];	// 64x32 monochrome display
 	uint8_t		keypad[16];
 }	t_chip8;
 
@@ -93,5 +96,10 @@ void	parse_arguments(int argc, char **argv, t_data *data);
 /********************************* chip8.c ************************************/
 void	init_chip8(t_chip8 *chip8);
 void	opcode_0(t_data *data);
+void	opcode_1(t_data *data);
+void	opcode_6(t_data *data);
+void	opcode_7(t_data *data);
+void	opcode_a(t_data *data);
+void	opcode_d(t_data *data);
 
 #endif
