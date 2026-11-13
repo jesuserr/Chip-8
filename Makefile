@@ -6,14 +6,14 @@
 #    By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/25 19:31:01 by jesuserr          #+#    #+#              #
-#    Updated: 2026/11/07 21:43:29 by jesuserr         ###   ########.fr        #
+#    Updated: 2026/11/13 22:56:40 by jesuserr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LIBFT_DIR = libft/
 
 NAME = chip8
-SRCS = main.c parser.c chip8.c
+SRCS = main.c parser.c chip8.c display.c
 
 PATH_SRCS = ./srcs/
 PATH_OBJS = ./srcs/objs/

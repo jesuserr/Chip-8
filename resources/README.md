@@ -3,6 +3,8 @@
 This repository is a small CHIP-8 emulator built incrementally as a learning
 project. The notes below are a development diary: each entry records what was
 added in a commit and what the project was trying to achieve at that point.
+This README is kept in the `resources/` directory alongside the implementation
+notes and ROM references.
 
 ## Development Diary
 
@@ -83,9 +85,20 @@ family. The first implemented handlers cover the IBM Logo milestone, while
 debug output makes the program counter, index register, registers, and decoded
 opcode visible during development.
 
-This is the current checkpoint: the interpreter can walk through the test ROM,
-but it is still a development build. Drawing pixels, timers, keyboard input,
-proper timing, and SDL presentation remain ahead.
+### 2026-11-13 - `5f80728` - Implement the minimum opcode set for IBM Logo
+
+The first complete ROM milestone was reached. The interpreter now implements
+the minimum instruction set needed by `roms/IBM_Logo.ch8`: `00E0`, `1NNN`,
+`6XNN`, `7XNN`, `ANNN`, and `DXYN`.
+
+The drawing instruction now reads sprite bytes from memory, XORs them onto the
+64x32 display, clips pixels at the screen edges, and sets `VF` when a lit pixel
+is erased. The display dimensions were also named as constants, and a second
+copy of the IBM Logo ROM was added for testing.
+
+The emulator can now execute the IBM Logo instruction path in the terminal.
+It is still a development build: there is no graphical display, keyboard
+input, timer loop, or sound yet.
 
 ## Build and Run
 
@@ -95,18 +108,18 @@ Build the emulator from the repository root:
 make
 ```
 
-Run it with a CHIP-8 ROM:
+Run it from the repository root with a CHIP-8 ROM:
 
 ```sh
 ./chip8 roms/IBM_Logo.ch8
 ```
 
-The current build prints decoded instructions and machine state to the
-terminal. It does not yet open a display window.
+The current build prints decoded instructions, machine state, and a hex dump
+of the display to the terminal. It does not yet open a display window.
 
 ## Next Entries
 
-The next development steps are to finish `DXYN` drawing and collision
-behavior, implement the remaining IBM Logo execution path, add the 60 Hz timer
-and input model, and then connect the emulator to an SDL display and keyboard.
-Each step will be added to this diary as its own commit.
+The next development steps are to add the remaining opcode families, add the
+60 Hz timer and input model, and then connect the emulator to an SDL display,
+keyboard, and sound layer. Each step will be added to this diary as its own
+commit.

@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/08 20:49:23 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/13 22:56:50 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,8 @@ void	opcode_6(t_data *data);
 void	opcode_7(t_data *data);
 void	opcode_a(t_data *data);
 void	opcode_d(t_data *data);
+
+/********************************* display.c **********************************/
+void	print_display(const void *src, size_t len, size_t bytes_per_line);
 
 #endif

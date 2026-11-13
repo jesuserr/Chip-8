@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:43 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/08 20:35:12 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/13 22:59:17 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ int	main(int argc, char **argv)
 			data.running = false;
 		//ft_hex_dump(&op_code, 2, 2);
 		//ft_printf("%d\n", op_code);
-		sleep(1);
+		usleep(500000);
 		debug_print_opcode(&data);
+		print_display(data.chip8.display, DISPLAY_SIZE, 64);
 	}
 	//ft_printf("\n\n");
 	//ft_hex_dump(data.chip8.memory + START_ADDRESS, data.rom_size, 2);
