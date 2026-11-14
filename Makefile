@@ -6,14 +6,14 @@
 #    By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/25 19:31:01 by jesuserr          #+#    #+#              #
-#    Updated: 2026/11/13 22:56:40 by jesuserr         ###   ########.fr        #
+#    Updated: 2026/11/14 17:19:28 by jesuserr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LIBFT_DIR = libft/
 
 NAME = chip8
-SRCS = main.c parser.c chip8.c display.c
+SRCS = main.c parser.c chip8.c graphics.c cycle.c
 
 PATH_SRCS = ./srcs/
 PATH_OBJS = ./srcs/objs/
@@ -25,6 +25,7 @@ DEPS = $(addprefix $(PATH_DEPS), $(SRCS:.c=.d))
 INCLUDE = -I./ -I./libft/includes/
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -pedantic -Wshadow -O2 #-g #-fsanitize=address
+LDFLAGS = -lSDL2 -lSDL2_gfx
 
 NORM = $(addprefix $(PATH_SRCS), $(SRCS)) ./srcs/chip8.h
 GREEN = "\033[0;92m"
@@ -42,7 +43,7 @@ $(PATH_OBJS)%.o: $(PATH_SRCS)%.c Makefile
 	$(CC) $(CFLAGS) -MMD $(INCLUDE) -c $< -o $@
 
 $(NAME): $(OBJS) $(LIBFT_DIR)libft.a
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)libft.a -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)libft.a -o $@ $(LDFLAGS)
 	@echo ${GREEN}"chip8 Compiled!"${NC};
 -include $(DEPS)
 

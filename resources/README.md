@@ -100,6 +100,19 @@ The emulator can now execute the IBM Logo instruction path in the terminal.
 It is still a development build: there is no graphical display, keyboard
 input, timer loop, or sound yet.
 
+### 2026-11-13 - `08e8d94` - Add basic display output and optimize `DXYN`
+
+The display became visible in the terminal. A new `display.c` module renders
+the 64x32 display buffer using `X` for an active pixel and a space for an
+inactive pixel. The main loop now prints this display after each instruction,
+making the IBM Logo milestone observable without SDL.
+
+The `DXYN` implementation was also tightened: it only toggles pixels when the
+sprite bit is set, records collisions when an active pixel is erased, and no
+longer emits a raw hex dump after every draw. The build now includes
+`display.c`, and the loop delay was adjusted so the terminal output can be
+followed while the ROM runs.
+
 ## Build and Run
 
 Build the emulator from the repository root:
@@ -114,12 +127,11 @@ Run it from the repository root with a CHIP-8 ROM:
 ./chip8 roms/IBM_Logo.ch8
 ```
 
-The current build prints decoded instructions, machine state, and a hex dump
-of the display to the terminal. It does not yet open a display window.
+The current build prints decoded instructions, machine state, and a text
+rendering of the display to the terminal. It does not yet open an SDL window.
 
 ## Next Entries
 
 The next development steps are to add the remaining opcode families, add the
-60 Hz timer and input model, and then connect the emulator to an SDL display,
-keyboard, and sound layer. Each step will be added to this diary as its own
-commit.
+60 Hz timer and input model, and then connect the emulator to SDL for a window,
+keyboard, and sound. Each step will be added to this diary as its own commit.

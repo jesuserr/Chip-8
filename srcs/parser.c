@@ -6,11 +6,13 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 21:41:11 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/07 22:05:35 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/14 17:25:01 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chip8.h"
+
+static void	load_rom(const char *rom_file_path, t_data *data);
 
 static void	load_rom(const char *rom_file_path, t_data *data)
 {

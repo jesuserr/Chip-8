@@ -16,3 +16,6 @@ opcode = 0xD01F
          +------ x   = (opcode >> 8) & 0xF  (Vx, here 0)
 nnn  = opcode & 0x0FFF
 kk   = opcode & 0x00FF
+
+TODOs
+- Add more precise clock ticking using SDL_GetTicks();

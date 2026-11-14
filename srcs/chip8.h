@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/13 22:56:50 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/14 17:51:37 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,24 @@
 # include <stdint.h>						// for fixed-width integer types
 # include <stdio.h>							// for fread
 # include <stdbool.h>						// for bool type
+# include <SDL2/SDL.h>						// for SDL library
+# include <SDL2/SDL2_gfxPrimitives.h>		// for SDL2_gfx graphics primitives
 
 /*
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
 **                              DEFINES
 */
 # define RAM_SIZE				4096
-# define START_ADDRESS			0x200
+# define START_ADDRESS			0x200	// Start address for programs in memory
 # define MAX_ROM_SIZE			(RAM_SIZE - START_ADDRESS)
-# define FONTSET_START_ADDRESS	0x50
-# define FONTSET_SIZE			80
+# define FONTSET_START_ADDRESS	0x50	// Start address for fontset in memory
+# define FONTSET_SIZE			80		// Size of the fontset in bytes
 # define DISPLAY_WIDTH			64
 # define DISPLAY_HEIGHT			32
 # define DISPLAY_SIZE			(DISPLAY_WIDTH * DISPLAY_HEIGHT)
+# define PIXEL_SIZE				16			// Size of each block in SDL window
+# define RGBA_WHITE				0xFFFFFFFF	// White color in RGBA format
+# define CYCLE_DELAY_MS			16
 
 /*
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
@@ -55,17 +60,26 @@ typedef struct s_chip8
 	uint8_t		keypad[16];
 }	t_chip8;
 
+typedef struct s_sdl_window
+{
+	SDL_Window		*window;
+	SDL_Renderer	*renderer;
+}	t_sdl_window;
+
 typedef struct s_data
 {
-	size_t		rom_size;
-	uint16_t	opcode;
-	uint8_t		opcode_x;			// 2nd nibble
-	uint8_t		opcode_y;			// 3rd nibble
-	uint8_t		opcode_n;			// 4th nibble
-	uint8_t		opcode_nn;			// 3rd and 4th nibbles (sometimes called kk)
-	uint16_t	opcode_nnn;			// 2nd, 3rd and 4th nibbles
-	bool		running;
-	t_chip8		chip8;
+	size_t			rom_size;
+	uint16_t		opcode;
+	uint8_t			opcode_x;		// 2nd nibble
+	uint8_t			opcode_y;		// 3rd nibble
+	uint8_t			opcode_n;		// 4th nibble
+	uint8_t			opcode_nn;		// 3rd and 4th nibbles (sometimes called kk)
+	uint16_t		opcode_nnn;		// 2nd, 3rd and 4th nibbles
+	bool			running;
+	t_chip8			chip8;
+	t_sdl_window	sdl;			// SDL window and renderer
+	uint32_t		cycle_delay;	// Delay between game loop iterations in ms
+	bool			emu_paused;		// flag to pause the game loop
 }	t_data;
 
 static const uint8_t	g_font_data[80] = {
@@ -90,9 +104,6 @@ static const uint8_t	g_font_data[80] = {
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
 **                        FUNCTION PROTOTYPES
 */
-/********************************* parser.c ***********************************/
-void	parse_arguments(int argc, char **argv, t_data *data);
-
 /********************************* chip8.c ************************************/
 void	init_chip8(t_chip8 *chip8);
 void	opcode_0(t_data *data);
@@ -102,7 +113,16 @@ void	opcode_7(t_data *data);
 void	opcode_a(t_data *data);
 void	opcode_d(t_data *data);
 
-/********************************* display.c **********************************/
-void	print_display(const void *src, size_t len, size_t bytes_per_line);
+/********************************* cycle.c ************************************/
+void	instruction_cycle(t_data *data);
+
+/********************************* graphics.c *********************************/
+bool	init_window(t_data *data);
+void	process_input_events(t_data *data);
+void	destroy_window(t_data *data);
+void	render_display(t_data *data);
+
+/********************************* parser.c ***********************************/
+void	parse_arguments(int argc, char **argv, t_data *data);
 
 #endif
