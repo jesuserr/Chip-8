@@ -113,6 +113,18 @@ longer emits a raw hex dump after every draw. The build now includes
 `display.c`, and the loop delay was adjusted so the terminal output can be
 followed while the ROM runs.
 
+### 2026-11-14 - `e1803ea` - Integrate SDL graphics and input events
+
+The emulator moved from terminal output to a graphical display. The new
+`graphics.c` module initializes SDL2 and SDL2_gfx, creates a scaled borderless
+window, and renders the 64x32 CHIP-8 display with a visible pixel grid.
+
+The fetch-decode-execute logic was moved into `cycle.c`, leaving `main.c` to
+coordinate initialization, input, execution, rendering, and cleanup. SDL
+events are now processed every loop: `Escape` quits the emulator, while
+`Space` or `P` pauses and resumes execution. The window also shows a small
+status overlay for the emulator and pause state.
+
 ## Build and Run
 
 Build the emulator from the repository root:
@@ -121,17 +133,21 @@ Build the emulator from the repository root:
 make
 ```
 
+The build requires SDL2 and SDL2_gfx because the executable links against
+`-lSDL2` and `-lSDL2_gfx`.
+
 Run it from the repository root with a CHIP-8 ROM:
 
 ```sh
 ./chip8 roms/IBM_Logo.ch8
 ```
 
-The current build prints decoded instructions, machine state, and a text
-rendering of the display to the terminal. It does not yet open an SDL window.
+The current build opens an SDL window and renders the IBM Logo ROM. Press
+`Escape` to quit, or `Space` / `P` to pause and resume. Debug information is
+still printed to the terminal.
 
 ## Next Entries
 
-The next development steps are to add the remaining opcode families, add the
-60 Hz timer and input model, and then connect the emulator to SDL for a window,
-keyboard, and sound. Each step will be added to this diary as its own commit.
+The next development steps are to add the remaining opcode families, map the
+CHIP-8 keypad to keyboard input, implement the 60 Hz timers, and add sound.
+Each step will be added to this diary as its own commit.

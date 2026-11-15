@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/14 17:51:37 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/15 21:29:26 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	opcode_6(t_data *data);
 void	opcode_7(t_data *data);
 void	opcode_a(t_data *data);
 void	opcode_d(t_data *data);
+void	opcode_tbd(t_data *data);
 
 /********************************* cycle.c ************************************/
 void	instruction_cycle(t_data *data);
@@ -124,5 +125,17 @@ void	render_display(t_data *data);
 
 /********************************* parser.c ***********************************/
 void	parse_arguments(int argc, char **argv, t_data *data);
+
+/*
+** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
+**                        FUNCTION POINTERS
+*/
+
+// Function pointer type for CHIP-8 opcode handlers. Each handler receives the
+// emulator state and returns no value. The opcode table can then dispatch an
+// instruction by indexing it with the opcode, rather than using a large
+// switch-case block. This keeps instruction selection compact, makes each
+// handler independent, and makes adding or changing opcodes less error-prone.
+typedef void			(*t_opcode_func)(t_data *data);
 
 #endif

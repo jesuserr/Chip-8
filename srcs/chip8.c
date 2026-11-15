@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 21:42:28 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/13 23:33:07 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/15 21:33:23 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	init_chip8(t_chip8 *chip8)
 	ft_bzero(chip8, sizeof(t_chip8));
 	chip8->program_counter = START_ADDRESS;
 	ft_memcpy(chip8->memory + FONTSET_START_ADDRESS, g_font_data, FONTSET_SIZE);
+}
+
+void	opcode_tbd(t_data *data)
+{
+	ft_printf("Opcode 0x%X not implemented yet.\n", data->opcode);
 }
 
 // Clears the display when the opcode is 00E0.
