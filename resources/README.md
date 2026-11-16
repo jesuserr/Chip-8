@@ -125,6 +125,18 @@ events are now processed every loop: `Escape` quits the emulator, while
 `Space` or `P` pauses and resumes execution. The window also shows a small
 status overlay for the emulator and pause state.
 
+### 2026-11-15 - `dfe4d5b` - Replace opcode switch with a function-pointer table
+
+Opcode dispatch was simplified by replacing the `switch` statement in
+`cycle.c` with a 16-entry function-pointer table indexed by the opcode's high
+nibble. Implemented opcode families point directly to their handlers, while
+unimplemented families use `opcode_tbd` and report that the instruction is not
+implemented yet. This makes adding new opcode families more localized.
+
+The repository also gained a small ROM test set: the CHIP-8 logo, IBM logo,
+Corax+ opcode tests, and flags tests. These ROMs provide the next checkpoints
+for expanding the interpreter beyond the initial IBM Logo instruction set.
+
 ## Build and Run
 
 Build the emulator from the repository root:
@@ -146,8 +158,15 @@ The current build opens an SDL window and renders the IBM Logo ROM. Press
 `Escape` to quit, or `Space` / `P` to pause and resume. Debug information is
 still printed to the terminal.
 
+Additional test ROMs are available in `roms/`, for example:
+
+```sh
+./chip8 roms/3-corax+.ch8
+```
+
 ## Next Entries
 
-The next development steps are to add the remaining opcode families, map the
-CHIP-8 keypad to keyboard input, implement the 60 Hz timers, and add sound.
-Each step will be added to this diary as its own commit.
+The next development steps are to implement the remaining opcode families and
+use the new test ROMs to verify them, then map the CHIP-8 keypad to keyboard
+input, implement the 60 Hz timers, and add sound. Each step will be added to
+this diary as its own commit.

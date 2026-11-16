@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 12:43:15 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/14 17:55:01 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/16 20:50:40 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ bool	init_window(t_data *data)
 	data->sdl.window = SDL_CreateWindow(NULL, SDL_WINDOWPOS_CENTERED, \
 		SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_BORDERLESS);
 	if (data->sdl.window == NULL)
-		return (ft_printf("SDL Create Window Error: %s\n", SDL_GetError()), false);
+		return (ft_printf("SDL Create Window Error: %s\n", SDL_GetError()), \
+			false);
 	data->sdl.renderer = SDL_CreateRenderer(data->sdl.window, -1, 0);
 	if (data->sdl.renderer == NULL)
-		return (ft_printf("SDL Create Renderer Error: %s\n", SDL_GetError()), false);
+		return (ft_printf("SDL Create Renderer Error: %s\n", SDL_GetError()), \
+			false);
 	data->cycle_delay = CYCLE_DELAY_MS;
 	return (true);
 }

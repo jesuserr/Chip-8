@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/15 21:29:26 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/16 20:10:26 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define RAM_SIZE				4096
 # define START_ADDRESS			0x200	// Start address for programs in memory
 # define MAX_ROM_SIZE			(RAM_SIZE - START_ADDRESS)
+# define STACK_SIZE				16
 # define FONTSET_START_ADDRESS	0x50	// Start address for fontset in memory
 # define FONTSET_SIZE			80		// Size of the fontset in bytes
 # define DISPLAY_WIDTH			64
@@ -52,7 +53,7 @@ typedef struct s_chip8
 	uint8_t		registers[16];		// 16 x 8-bit registers (V0 to VF)
 	uint16_t	index_register;		// points to memory location
 	uint16_t	program_counter;	// points to current instruction in memory
-	uint16_t	stack[16];			// 16-level stack
+	uint16_t	stack[STACK_SIZE];	// 16-level stack
 	uint8_t		stack_pointer;		// points to the top of the stack
 	uint8_t		delay_timer;		// counts down at 60 Hz when non-zero
 	uint8_t		sound_timer;		// same as delay_timer, beeps when non-zero
@@ -108,8 +109,13 @@ static const uint8_t	g_font_data[80] = {
 void	init_chip8(t_chip8 *chip8);
 void	opcode_0(t_data *data);
 void	opcode_1(t_data *data);
+void	opcode_2(t_data *data);
+void	opcode_3(t_data *data);
+void	opcode_4(t_data *data);
+void	opcode_5(t_data *data);
 void	opcode_6(t_data *data);
 void	opcode_7(t_data *data);
+void	opcode_9(t_data *data);
 void	opcode_a(t_data *data);
 void	opcode_d(t_data *data);
 void	opcode_tbd(t_data *data);
