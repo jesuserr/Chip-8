@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 17:01:28 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/16 20:49:47 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/19 20:52:42 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	decode(t_data *data);
 static void	execute(t_data *data);
 static const t_opcode_func	g_opcodes[16] = {
 	opcode_0, opcode_1, opcode_2, opcode_3, opcode_4, opcode_5,
-	opcode_6, opcode_7, opcode_tbd, opcode_9, opcode_a, opcode_tbd,
+	opcode_6, opcode_7, opcode_8, opcode_9, opcode_a, opcode_tbd,
 	opcode_tbd, opcode_d, opcode_tbd, opcode_tbd};
 
 static void	fetch(t_data *data)

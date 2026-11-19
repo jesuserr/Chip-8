@@ -137,6 +137,18 @@ The repository also gained a small ROM test set: the CHIP-8 logo, IBM logo,
 Corax+ opcode tests, and flags tests. These ROMs provide the next checkpoints
 for expanding the interpreter beyond the initial IBM Logo instruction set.
 
+### 2026-11-16 - `4d77486` - Implement call, return, and conditional skips
+
+The interpreter gained its first flow-control group beyond plain jumps. It now
+supports `00EE` return, `2NNN` subroutine calls, `3XNN` and `4XNN` immediate
+skips, and `5XY0` and `9XY0` register comparison skips.
+
+Subroutine calls save the next program counter on the 16-level stack, and
+returns restore it after decrementing the stack pointer. Stack underflow and
+overflow are detected and stop execution with a diagnostic instead of
+accessing invalid stack entries. The new handlers are also registered in the
+function-pointer dispatch table.
+
 ## Build and Run
 
 Build the emulator from the repository root:
@@ -166,7 +178,7 @@ Additional test ROMs are available in `roms/`, for example:
 
 ## Next Entries
 
-The next development steps are to implement the remaining opcode families and
-use the new test ROMs to verify them, then map the CHIP-8 keypad to keyboard
-input, implement the 60 Hz timers, and add sound. Each step will be added to
-this diary as its own commit.
+The next development steps are to implement the remaining opcode families,
+especially the arithmetic and keypad instructions, and use the new test ROMs
+to verify them. After that, the CHIP-8 keypad, 60 Hz timers, and sound remain
+to be added. Each step will be added to this diary as its own commit.

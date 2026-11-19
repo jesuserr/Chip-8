@@ -6,11 +6,16 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 21:42:28 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/16 20:46:53 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/19 22:25:00 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chip8.h"
+
+static const t_opcode_func	g_opcodes_8xyn[16] = {
+	opcode_8xy0, opcode_8xy1, opcode_8xy2, opcode_8xy3, opcode_8xy4,
+	opcode_8xy5, opcode_8xy6, opcode_8xy7, opcode_tbd, opcode_tbd,
+	opcode_tbd, opcode_tbd, opcode_tbd, opcode_tbd, opcode_8xye, opcode_tbd};
 
 void	init_chip8(t_chip8 *chip8)
 {
@@ -111,6 +116,12 @@ void	opcode_7(t_data *data)
 {
 	ft_printf("7xnn - ADD Vx, byte\n");
 	data->chip8.registers[data->opcode_x] += data->opcode_nn;
+}
+
+// Dispatches 8xyN instructions using the opcode's lowest nibble.
+void	opcode_8(t_data *data)
+{
+	g_opcodes_8xyn[data->opcode_n](data);
 }
 
 // Skips the next instruction when Vx differs from Vy.

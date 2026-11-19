@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/16 20:10:26 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/19 22:27:01 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	opcode_4(t_data *data);
 void	opcode_5(t_data *data);
 void	opcode_6(t_data *data);
 void	opcode_7(t_data *data);
+void	opcode_8(t_data *data);
 void	opcode_9(t_data *data);
 void	opcode_a(t_data *data);
 void	opcode_d(t_data *data);
@@ -128,6 +129,17 @@ bool	init_window(t_data *data);
 void	process_input_events(t_data *data);
 void	destroy_window(t_data *data);
 void	render_display(t_data *data);
+
+/****************************** opcodes_8xyn.c ********************************/
+void	opcode_8xy0(t_data *data);
+void	opcode_8xy1(t_data *data);
+void	opcode_8xy2(t_data *data);
+void	opcode_8xy3(t_data *data);
+void	opcode_8xy4(t_data *data);
+void	opcode_8xy5(t_data *data);
+void	opcode_8xy6(t_data *data);
+void	opcode_8xy7(t_data *data);
+void	opcode_8xye(t_data *data);
 
 /********************************* parser.c ***********************************/
 void	parse_arguments(int argc, char **argv, t_data *data);
