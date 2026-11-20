@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/19 22:27:01 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/20 22:25:03 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void	opcode_8(t_data *data);
 void	opcode_9(t_data *data);
 void	opcode_a(t_data *data);
 void	opcode_d(t_data *data);
+void	opcode_f(t_data *data);
 void	opcode_tbd(t_data *data);
 
 /********************************* cycle.c ************************************/
@@ -140,6 +141,14 @@ void	opcode_8xy5(t_data *data);
 void	opcode_8xy6(t_data *data);
 void	opcode_8xy7(t_data *data);
 void	opcode_8xye(t_data *data);
+
+/****************************** opcodes_fxnn.c ********************************/
+void	opcode_fx33(t_data *data);
+void	opcode_fxn5(t_data *data);
+void	opcode_fx07(t_data *data);
+void	opcode_fx18(t_data *data);
+void	opcode_fx29(t_data *data);
+void	opcode_fx1e(t_data *data);
 
 /********************************* parser.c ***********************************/
 void	parse_arguments(int argc, char **argv, t_data *data);

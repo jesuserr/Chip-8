@@ -149,6 +149,19 @@ overflow are detected and stop execution with a diagnostic instead of
 accessing invalid stack entries. The new handlers are also registered in the
 function-pointer dispatch table.
 
+### 2026-11-19 - `d1566f1` - Implement the `8XYN` arithmetic family
+
+The interpreter gained the register-to-register arithmetic and logic
+instructions `8XY0` through `8XY7` and `8XYE`: load, OR, AND, XOR, add,
+subtract, shift right, reverse subtract, and shift left.
+
+These handlers update `VF` according to CHIP-8 behavior. Addition records
+carry, subtraction records whether no borrow occurred, and the shift
+instructions preserve the bit shifted out. The logical operations clear `VF`.
+The `8XYN` family is selected through a second function-pointer table indexed
+by the opcode's lowest nibble, and its handlers were moved into
+`opcodes_8xyn.c`.
+
 ## Build and Run
 
 Build the emulator from the repository root:
@@ -179,6 +192,7 @@ Additional test ROMs are available in `roms/`, for example:
 ## Next Entries
 
 The next development steps are to implement the remaining opcode families,
-especially the arithmetic and keypad instructions, and use the new test ROMs
-to verify them. After that, the CHIP-8 keypad, 60 Hz timers, and sound remain
-to be added. Each step will be added to this diary as its own commit.
+including random values, keypad instructions, timers, and memory operations,
+then use the test ROMs to verify their behavior. Sound and the final timing
+model remain to be added afterward. Each step will be added to this diary as
+its own commit.

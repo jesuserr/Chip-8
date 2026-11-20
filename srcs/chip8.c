@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 21:42:28 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/19 22:25:00 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/20 22:54:32 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ static const t_opcode_func	g_opcodes_8xyn[16] = {
 	opcode_8xy0, opcode_8xy1, opcode_8xy2, opcode_8xy3, opcode_8xy4,
 	opcode_8xy5, opcode_8xy6, opcode_8xy7, opcode_tbd, opcode_tbd,
 	opcode_tbd, opcode_tbd, opcode_tbd, opcode_tbd, opcode_8xye, opcode_tbd};
+
+static const t_opcode_func	g_opcodes_fxnn[16] = {
+	opcode_tbd, opcode_tbd, opcode_tbd, opcode_fx33, opcode_tbd,
+	opcode_fxn5, opcode_tbd, opcode_fx07, opcode_fx18, opcode_fx29,
+	opcode_tbd, opcode_tbd, opcode_tbd, opcode_tbd, opcode_fx1e,
+	opcode_tbd};
 
 void	init_chip8(t_chip8 *chip8)
 {
@@ -171,4 +177,10 @@ void	opcode_d(t_data *data)
 		}
 		start += DISPLAY_WIDTH;
 	}
+}
+
+// Dispatches FxNN instructions using the opcode's second-lowest nibble.
+void	opcode_f(t_data *data)
+{
+	g_opcodes_fxnn[data->opcode_n](data);
 }
