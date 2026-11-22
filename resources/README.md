@@ -162,6 +162,20 @@ The `8XYN` family is selected through a second function-pointer table indexed
 by the opcode's lowest nibble, and its handlers were moved into
 `opcodes_8xyn.c`.
 
+### 2026-11-20 - `fe7f25a` - Implement the `FX__` opcodes except `FX0A`
+
+The interpreter gained the supported `FX__` instructions: `FX07`, `FX15`,
+`FX18`, `FX1E`, `FX29`, `FX33`, `FX55`, and `FX65`. These cover reading and
+writing the delay and sound timers, adding `Vx` to `I`, locating font sprites,
+converting `Vx` to packed decimal digits, and transferring registers between
+memory and the emulator state.
+
+The new handlers live in `opcodes_fxnn.c` and are selected through a dedicated
+function-pointer table. Memory-bound checks were added for BCD and register
+stores. `FX0A`, which waits for a key press, remains a TODO until keyboard
+input is implemented. A quirks test ROM was also added for the next round of
+validation.
+
 ## Build and Run
 
 Build the emulator from the repository root:
@@ -191,8 +205,7 @@ Additional test ROMs are available in `roms/`, for example:
 
 ## Next Entries
 
-The next development steps are to implement the remaining opcode families,
-including random values, keypad instructions, timers, and memory operations,
-then use the test ROMs to verify their behavior. Sound and the final timing
-model remain to be added afterward. Each step will be added to this diary as
-its own commit.
+The next development steps are to implement random values, keypad
+instructions, `FX0A`, and the remaining opcode families. The 60 Hz timer
+update loop, sound output, and validation against the quirks ROM also remain
+to be completed. Each step will be added to this diary as its own commit.

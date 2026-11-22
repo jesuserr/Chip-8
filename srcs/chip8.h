@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/20 22:25:03 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/22 21:00:14 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <stdbool.h>						// for bool type
 # include <SDL2/SDL.h>						// for SDL library
 # include <SDL2/SDL2_gfxPrimitives.h>		// for SDL2_gfx graphics primitives
+# include <time.h>							// for seeding random number
 
 /*
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
@@ -118,6 +119,8 @@ void	opcode_7(t_data *data);
 void	opcode_8(t_data *data);
 void	opcode_9(t_data *data);
 void	opcode_a(t_data *data);
+void	opcode_b(t_data *data);
+void	opcode_c(t_data *data);
 void	opcode_d(t_data *data);
 void	opcode_f(t_data *data);
 void	opcode_tbd(t_data *data);

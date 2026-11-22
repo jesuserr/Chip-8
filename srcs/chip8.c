@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 21:42:28 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/20 22:54:32 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/22 21:13:15 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_chip8(t_chip8 *chip8)
 	ft_bzero(chip8, sizeof(t_chip8));
 	chip8->program_counter = START_ADDRESS;
 	ft_memcpy(chip8->memory + FONTSET_START_ADDRESS, g_font_data, FONTSET_SIZE);
+	srand(time(NULL));
 }
 
 // Reports opcodes that are not implemented by the emulator yet.
@@ -144,6 +145,30 @@ void	opcode_a(t_data *data)
 {
 	ft_printf("Annn - LD I, addr\n");
 	data->chip8.index_register = data->opcode_nnn;
+}
+
+// Jumps to the address encoded in the lowest 12 bits plus the value of V0.
+void	opcode_b(t_data *data)
+{
+	uint16_t	addr;
+
+	ft_printf("Bnnn - JP V0, addr\n");
+	addr = data->opcode_nnn + data->chip8.registers[0];
+	if (addr > RAM_SIZE - 2)
+	{
+		ft_printf("Memory overflow at PC=0x%X (Bnnn)\n", \
+			data->chip8.program_counter - 2);
+		data->running = false;
+		return ;
+	}
+	data->chip8.program_counter = addr;
+}
+
+// Generates a random byte and masks it with the immediate byte in Vx.
+void	opcode_c(t_data *data)
+{
+	ft_printf("Cxnn - RND Vx, byte\n");
+	data->chip8.registers[data->opcode_x] = (rand() % 256) & data->opcode_nn;
 }
 
 // Draws an n-byte sprite from memory[I] at (Vx, Vy), XORing set pixels onto
