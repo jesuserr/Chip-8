@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/22 21:00:14 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/22 21:49:39 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,16 @@ static const uint8_t	g_font_data[80] = {
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
 **                        FUNCTION PROTOTYPES
 */
-/********************************* chip8.c ************************************/
-void	init_chip8(t_chip8 *chip8);
+/********************************* cycle.c ************************************/
+void	instruction_cycle(t_data *data);
+
+/********************************* graphics.c *********************************/
+bool	init_window(t_data *data);
+void	process_input_events(t_data *data);
+void	destroy_window(t_data *data);
+void	render_display(t_data *data);
+
+/******************************** opcodes.c ***********************************/
 void	opcode_0(t_data *data);
 void	opcode_1(t_data *data);
 void	opcode_2(t_data *data);
@@ -124,15 +132,6 @@ void	opcode_c(t_data *data);
 void	opcode_d(t_data *data);
 void	opcode_f(t_data *data);
 void	opcode_tbd(t_data *data);
-
-/********************************* cycle.c ************************************/
-void	instruction_cycle(t_data *data);
-
-/********************************* graphics.c *********************************/
-bool	init_window(t_data *data);
-void	process_input_events(t_data *data);
-void	destroy_window(t_data *data);
-void	render_display(t_data *data);
 
 /****************************** opcodes_8xyn.c ********************************/
 void	opcode_8xy0(t_data *data);

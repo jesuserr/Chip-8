@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chip8.c                                            :+:      :+:    :+:   */
+/*   opcodes.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 21:42:28 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/22 21:13:15 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/22 21:48:44 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ static const t_opcode_func	g_opcodes_fxnn[16] = {
 	opcode_fxn5, opcode_tbd, opcode_fx07, opcode_fx18, opcode_fx29,
 	opcode_tbd, opcode_tbd, opcode_tbd, opcode_tbd, opcode_fx1e,
 	opcode_tbd};
-
-void	init_chip8(t_chip8 *chip8)
-{
-	ft_bzero(chip8, sizeof(t_chip8));
-	chip8->program_counter = START_ADDRESS;
-	ft_memcpy(chip8->memory + FONTSET_START_ADDRESS, g_font_data, FONTSET_SIZE);
-	srand(time(NULL));
-}
 
 // Reports opcodes that are not implemented by the emulator yet.
 void	opcode_tbd(t_data *data)

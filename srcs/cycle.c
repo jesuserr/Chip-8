@@ -6,13 +6,13 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 17:01:28 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/22 21:28:05 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/22 21:55:49 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chip8.h"
 
-static void	fetch(t_data *data);
+static bool	fetch(t_data *data);
 static void	decode(t_data *data);
 static void	execute(t_data *data);
 static const t_opcode_func	g_opcodes[16] = {
@@ -20,16 +20,17 @@ static const t_opcode_func	g_opcodes[16] = {
 	opcode_6, opcode_7, opcode_8, opcode_9, opcode_a, opcode_b,
 	opcode_c, opcode_d, opcode_tbd, opcode_f};
 
-static void	fetch(t_data *data)
+static bool	fetch(t_data *data)
 {
 	if (data->chip8.program_counter > RAM_SIZE - 2)
 	{
 		ft_printf("Memory overflow at PC=0x%X\n", data->chip8.program_counter);
 		data->running = false;
-		return ;
+		return (false);
 	}
 	data->opcode = data->chip8.memory[data->chip8.program_counter++] << 8;
 	data->opcode |= data->chip8.memory[data->chip8.program_counter++];
+	return (true);
 }
 
 static void	decode(t_data *data)
@@ -48,8 +49,7 @@ static void	execute(t_data *data)
 
 void	instruction_cycle(t_data *data)
 {
-	fetch(data);
-	if (!data->running)
+	if (!fetch(data))
 		return ;
 	decode(data);
 	execute(data);

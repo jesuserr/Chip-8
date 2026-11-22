@@ -176,6 +176,19 @@ stores. `FX0A`, which waits for a key press, remains a TODO until keyboard
 input is implemented. A quirks test ROM was also added for the next round of
 validation.
 
+### 2026-11-22 - `6259256` - Implement `BNNN`, `CXNN`, and fetch safety
+
+The interpreter gained `BNNN` and `CXNN`. `BNNN` jumps to the 12-bit address
+plus the value of `V0`, with a guard that stops execution if the resulting
+address exceeds RAM. `CXNN` generates a random byte and masks it with the
+instruction's immediate byte.
+
+Random generation is now seeded once during CHIP-8 initialization. The fetch
+stage also verifies that the program counter can read a complete two-byte
+instruction before accessing memory, stopping the emulator with a diagnostic
+if the address leaves valid RAM. The main dispatch table now routes `B` and
+`C` opcode families to their handlers.
+
 ## Build and Run
 
 Build the emulator from the repository root:
@@ -205,7 +218,8 @@ Additional test ROMs are available in `roms/`, for example:
 
 ## Next Entries
 
-The next development steps are to implement random values, keypad
-instructions, `FX0A`, and the remaining opcode families. The 60 Hz timer
-update loop, sound output, and validation against the quirks ROM also remain
-to be completed. Each step will be added to this diary as its own commit.
+The next development steps are to implement keypad instructions and `FX0A`,
+finish the remaining `EX__` and other opcode families, and complete the 60 Hz
+timer and sound model. Validation against the flags and quirks ROMs remains
+part of the next milestone sequence. Each step will be added to this diary as
+its own commit.
