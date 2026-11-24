@@ -201,6 +201,21 @@ when the program counter is outside RAM. `instruction_cycle` uses that result
 to stop before decode or execute, making invalid-fetch handling explicit instead
 of part of the instruction execution flow.
 
+### 2026-11-24 - `c7d9b3d` - Implement keypad input and key wait
+
+The emulator now implements `EX9E`, `EXA1`, and `FX0A`. The skip instructions
+check whether the keypad key in `Vx` is currently pressed or unpressed.
+`FX0A` waits until a key is pressed and released, then stores that key value
+in `Vx`.
+
+SDL polls the physical keyboard each frame and updates the 16-entry CHIP-8
+keypad array. The standard mapping uses `X/1/2/3/QWER/ASDZC/4RFV` for the
+CHIP-8 keys `0-F`. `FX0A` uses a latched key state so that a press is not
+recorded until the corresponding key is released.
+
+A keypad test ROM was added at `roms/6-keypad.ch8` for validating keypad
+skips, key waits, and keyboard mapping.
+
 ## Build and Run
 
 Build the emulator from the repository root:
@@ -226,11 +241,13 @@ Additional test ROMs are available in `roms/`, for example:
 
 ```sh
 ./chip8 roms/3-corax+.ch8
+./chip8 roms/6-keypad.ch8
 ```
 
 ## Next Entries
 
-The next development steps are to implement keypad instructions and `FX0A`,
-finish the remaining opcode families, and complete the 60 Hz timer and sound
-model. Validation against the flags and quirks ROMs remains part of the next
-milestone sequence. Each step will be added to this diary as its own commit.
+The next development steps are to complete the 60 Hz delay and sound timer
+model, add sound output, and run broader validation against the flags, quirks,
+and keypad ROMs. Remaining opcode edge cases and emulator quirks should be
+resolved during testing. Each step will be added to this diary as its own
+commit.

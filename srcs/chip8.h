@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/24 23:04:10 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/24 23:31:27 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,18 @@ static const uint8_t	g_font_data[80] = {
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
 **                        FUNCTION PROTOTYPES
 */
-/********************************* cycle.c ************************************/
+/*********************************** cycle.c **********************************/
 void	instruction_cycle(t_data *data);
 
-/********************************* graphics.c *********************************/
+/********************************** display.c *********************************/
 bool	init_window(t_data *data);
-void	process_input_events(t_data *data);
 void	destroy_window(t_data *data);
 void	render_display(t_data *data);
 
-/******************************** opcodes.c ***********************************/
+/*********************************** input.c **********************************/
+void	process_input_events(t_data *data);
+
+/********************************** opcodes.c *********************************/
 void	opcode_0(t_data *data);
 void	opcode_1(t_data *data);
 void	opcode_2(t_data *data);
@@ -135,7 +137,7 @@ void	opcode_e(t_data *data);
 void	opcode_f(t_data *data);
 void	opcode_tbd(t_data *data);
 
-/****************************** opcodes_8xyn.c ********************************/
+/******************************* opcodes_8xyn.c *******************************/
 void	opcode_8xy0(t_data *data);
 void	opcode_8xy1(t_data *data);
 void	opcode_8xy2(t_data *data);
@@ -146,7 +148,7 @@ void	opcode_8xy6(t_data *data);
 void	opcode_8xy7(t_data *data);
 void	opcode_8xye(t_data *data);
 
-/****************************** opcodes_fxnn.c ********************************/
+/******************************* opcodes_fxnn.c *******************************/
 void	opcode_fx33(t_data *data);
 void	opcode_fxn5(t_data *data);
 void	opcode_fx07(t_data *data);
@@ -155,7 +157,7 @@ void	opcode_fx29(t_data *data);
 void	opcode_fx1e(t_data *data);
 void	opcode_fx0a(t_data *data);
 
-/********************************* parser.c ***********************************/
+/********************************** parser.c **********************************/
 void	parse_arguments(int argc, char **argv, t_data *data);
 
 /*
