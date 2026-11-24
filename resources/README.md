@@ -189,6 +189,18 @@ instruction before accessing memory, stopping the emulator with a diagnostic
 if the address leaves valid RAM. The main dispatch table now routes `B` and
 `C` opcode families to their handlers.
 
+### 2026-11-22 - `da60ace` - Consolidate opcode handlers and refactor fetch
+
+The central CHIP-8 opcode implementations and the nested `8XYN` and `FXNN`
+dispatch tables were consolidated in `opcodes.c`. Initialization moved with
+those handlers, leaving `main.c` focused on startup, the SDL event loop, and
+cleanup.
+
+Fetch now returns `true` after successfully reading an instruction and `false`
+when the program counter is outside RAM. `instruction_cycle` uses that result
+to stop before decode or execute, making invalid-fetch handling explicit instead
+of part of the instruction execution flow.
+
 ## Build and Run
 
 Build the emulator from the repository root:
@@ -219,7 +231,6 @@ Additional test ROMs are available in `roms/`, for example:
 ## Next Entries
 
 The next development steps are to implement keypad instructions and `FX0A`,
-finish the remaining `EX__` and other opcode families, and complete the 60 Hz
-timer and sound model. Validation against the flags and quirks ROMs remains
-part of the next milestone sequence. Each step will be added to this diary as
-its own commit.
+finish the remaining opcode families, and complete the 60 Hz timer and sound
+model. Validation against the flags and quirks ROMs remains part of the next
+milestone sequence. Each step will be added to this diary as its own commit.

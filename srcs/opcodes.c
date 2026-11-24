@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/07 21:42:28 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/22 21:48:44 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/24 23:07:31 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static const t_opcode_func	g_opcodes_8xyn[16] = {
 static const t_opcode_func	g_opcodes_fxnn[16] = {
 	opcode_tbd, opcode_tbd, opcode_tbd, opcode_fx33, opcode_tbd,
 	opcode_fxn5, opcode_tbd, opcode_fx07, opcode_fx18, opcode_fx29,
-	opcode_tbd, opcode_tbd, opcode_tbd, opcode_tbd, opcode_fx1e,
+	opcode_fx0a, opcode_tbd, opcode_tbd, opcode_tbd, opcode_fx1e,
 	opcode_tbd};
 
 // Reports opcodes that are not implemented by the emulator yet.
@@ -193,6 +193,27 @@ void	opcode_d(t_data *data)
 			byte <<= 1;
 		}
 		start += DISPLAY_WIDTH;
+	}
+}
+
+// Skips the next instruction based on whether the keypad key in Vx is pressed
+// or unpressed, according to the Ex9E or ExA1 opcode variant.
+void	opcode_e(t_data *data)
+{
+	uint8_t	key;
+
+	key = data->chip8.registers[data->opcode_x] & 0x0F;
+	if (data->opcode_nn == 0x9E)
+	{
+		ft_printf("Ex9E - SKP Vx\n");
+		if (data->chip8.keypad[key])
+			data->chip8.program_counter += 2;
+	}
+	else if (data->opcode_nn == 0xA1)
+	{
+		ft_printf("ExA1 - SKNP Vx\n");
+		if (!data->chip8.keypad[key])
+			data->chip8.program_counter += 2;
 	}
 }
 

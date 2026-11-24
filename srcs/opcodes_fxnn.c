@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/19 20:38:53 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/20 22:50:29 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/24 23:07:31 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,25 @@ void	opcode_fx29(t_data *data)
 	data->chip8.index_register = FONTSET_START_ADDRESS + value * 5;
 }
 
-// Wait for a key press, store the value of the key in Vx. All execution stops
-// until a key is pressed, then the value of that key is stored in Vx.
+// Waits for a pressed key to be released, then stores its value in Vx.
+// Re-executes the opcode until a key press and release are both detected.
 void	opcode_fx0a(t_data *data)
 {
-	(void)data;
-	ft_printf("TODO!!! Fx0A - LD Vx, K\n");
+	uint8_t	i;
+
+	ft_printf("Fx0A - LD Vx, K\n");
+	for (i = 0; i < 16; i++)
+	{
+		if (data->chip8.keypad[i] && data->key_latched == 0)
+			data->key_latched = i + 1;
+		else if (data->chip8.keypad[i] == 0 && data->key_latched == i + 1)
+		{
+			data->chip8.registers[data->opcode_x] = i;
+			data->key_latched = 0;
+			return ;
+		}
+	}
+	data->chip8.program_counter -= 2;
 }
 
 // Adds Vx to I and keeps the result within the 12-bit address range.

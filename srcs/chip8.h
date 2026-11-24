@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 19:30:51 by jesuserr          #+#    #+#             */
-/*   Updated: 2026/11/22 21:49:39 by jesuserr         ###   ########.fr       */
+/*   Updated: 2026/11/24 23:04:10 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_data
 	t_sdl_window	sdl;			// SDL window and renderer
 	uint32_t		cycle_delay;	// Delay between game loop iterations in ms
 	bool			emu_paused;		// flag to pause the game loop
+	uint8_t			key_latched;	// latched key value for Fx0A instruction
 }	t_data;
 
 static const uint8_t	g_font_data[80] = {
@@ -130,6 +131,7 @@ void	opcode_a(t_data *data);
 void	opcode_b(t_data *data);
 void	opcode_c(t_data *data);
 void	opcode_d(t_data *data);
+void	opcode_e(t_data *data);
 void	opcode_f(t_data *data);
 void	opcode_tbd(t_data *data);
 
@@ -151,6 +153,7 @@ void	opcode_fx07(t_data *data);
 void	opcode_fx18(t_data *data);
 void	opcode_fx29(t_data *data);
 void	opcode_fx1e(t_data *data);
+void	opcode_fx0a(t_data *data);
 
 /********************************* parser.c ***********************************/
 void	parse_arguments(int argc, char **argv, t_data *data);
